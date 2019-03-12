@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-------------Ajouter des br en js après chaque lettre, et ajouter les lettres dans l'ordre inverse, boucle et manipulation du dom-----
+    transformer le rendu en image ? https://www.npmjs.com/package/html-to-image ------------>
+    <style>
+        .container {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            background-color: #0f1216;
+            color: white;
+            margin: 0 auto;
+        }
+
+        #fairu {
+            display:flex;
+            flex-direction: column-reverse;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="render"></h1>
+    <div id="fairu">
+        <div class="fLetter">T</div>
+        <div class="fLetter">e</div>
+        <div class="fLetter">s</div>
+        <div class="fLetter">t</div>
+    </div>
+
+    <form action="">
+        <input type="text">
+        <button>Envoi</button>
+    </form>
+
+    <script>
+        "use strict"
+        let myForm = document.querySelector('form');
+        myForm.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            //            document.querySelector('input').value = "";
+            let input = document.querySelector('input').value;
+            console.log(input);
+            let tabLetter = [];
+            for (let letter of input) {
+                tabLetter.unshift(letter);
+            };
+            console.log(tabLetter);
+            let version = document.createElement('p');
+            let nHtml="Rendu : ";
+            for (let nLetter in tabLetter){
+                nHtml=nHtml+tabLetter[nLetter];
+            }
+            version.textContent=nHtml;
+            render.appendChild(version);
+        });
+    </script>
+</body>
+
+</html>
