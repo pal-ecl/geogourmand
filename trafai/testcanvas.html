@@ -1,0 +1,87 @@
+<html>
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+                #affichage {
+                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                    background-color: blue;
+                    color: white;
+                    margin: 0 auto;
+                }
+        
+                /* les lettres doivent s'afficher de bas en haut et de gauche à droite. */
+                .fairu {
+                    display: flex;
+                    flex-direction: column-reverse;
+                    flex-wrap: wrap;
+                    height: 150px;
+                    align-content: flex-start;
+                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                    background-color: #0f1216;
+                    color: white;
+                }
+        
+                .fLetter {
+                    font-family: cursive;
+                    padding: 5px;
+                    background-color: black;
+                    margin: 0;
+                }
+                </style>
+</head>
+
+<body bgcolor="black">
+    <div id="wholebody">
+        <a href="javascript:genScreenshotgraph()"><button style="background:white; cursor:pointer">Save </button> </a>
+            </div>>
+        <div id="affichage"></div>
+
+        <form action="">
+            <input type="text">
+            <button>Envoi</button>
+        </form>
+
+</body>
+
+<script>
+    let inputFForm = document.querySelector('form');
+    inputFForm.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+        let input = document.querySelector('input').value;
+        //            document.querySelector('input').value = "";
+        //on place chaque lettre dans un tableau
+        let fairu = document.createElement('div');
+        fairu.className = "fairu";
+
+        for (let letter of input) {
+            let divFairu = document.createElement('div');
+            divFairu.className = "fLetter";
+            divFairu.textContent = letter;
+            fairu.appendChild(divFairu);
+        };
+        affichage.appendChild(fairu);
+    });
+
+    function genScreenshotgraph() {
+        document.querySelector('input').value = "";
+        html2canvas(document.getElementById('affichage'), {
+
+            onrendered: function (canvas) {
+
+                var imgData = canvas.toDataURL("image/jpeg");
+                var pdf = new jsPDF();
+                pdf.addImage(imgData, 'JPEG', 0, 0, -180, -180);
+                pdf.save("download.pdf");
+
+            }
+        });
+        let fairu = document.querySelector('.fairu');
+        affichage.removeChild(fairu);
+
+    }
+</script>
+
+</html>
