@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-------------Ajouter des br en js après chaque lettre, et ajouter les lettres dans l'ordre inverse, boucle et manipulation du dom-----
+    transformer le rendu en image ? https://www.npmjs.com/package/html-to-image ------------>
+    <style>
+        #affichage {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            background-color: blue;
+            color: white;
+            margin: 0 auto;
+        }
+
+        /* les lettres doivent s'afficher de bas en haut et de gauche à droite. */
+        .fairu {
+            display: flex;
+            flex-direction: column-reverse;
+            flex-wrap: wrap;
+            height: 150px;
+            align-content: flex-start;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            background-color: #0f1216;
+            color: white;
+        }
+
+        .fLetter {
+            font-family: cursive;
+            padding: 5px;
+            background-color: pink;
+            margin: 0;
+        }
+
+        .canvas__container {
+            height: 100%;
+            position: relative;
+            width: 100%;
+        }
+
+        .canvas__canvas {
+            height: 100%;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .canvas__mirror {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas__container">
+        <canvas id="cnvs" class="canvas__canvas">test canvas</canvas>
+    </div>
+    <h1>Trafai</h1>
+    <div id="affichage"></div>
+
+    <form action="">
+        <input type="text">
+        <button>Envoi</button>
+    </form>
+
+    <script>
+        "use strict"
+        //on sélectionne les éléments rentrés dans l'input
+        let inputFForm = document.querySelector('form');
+        inputFForm.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            let input = document.querySelector('input').value;
+            //            document.querySelector('input').value = "";
+            //on place chaque lettre dans un tableau
+            let fairu = document.createElement('div');
+            fairu.className = "fairu";
+
+            for (let letter of input) {
+                let divFairu = document.createElement('div');
+                divFairu.className = "fLetter";
+                divFairu.textContent = letter;
+                fairu.appendChild(divFairu);
+            };
+            affichage.appendChild(fairu);
+        });
+
+        html2canvas(document.getElementById('affichage'), {
+            onrendered: function (canvas) {
+                // document.body.appendChild(canvas);
+                window.open(canvas.toDataURL('image/jpeg'));
+            }
+        });
+
+        var c = document.getElementById('the_canvas_element_id');
+        var t = c.getContext('2d');
+    </script>
+</body>
+
+</html>

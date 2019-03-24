@@ -9,9 +9,14 @@
     <!-------------Ajouter des br en js après chaque lettre, et ajouter les lettres dans l'ordre inverse, boucle et manipulation du dom-----
     transformer le rendu en image ? https://www.npmjs.com/package/html-to-image ------------>
     <style>
-        #affichage {
+        @font-face {
+            font-family: "fontFairunique";
+            src: url('fontFairunique.ttf');
+        }
+
+        .container {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            background-color: blue;
+            background-color: #032711;
             color: white;
             margin: 0 auto;
         }
@@ -21,85 +26,82 @@
             display: flex;
             flex-direction: column-reverse;
             flex-wrap: wrap;
-            height: 150px;
+            max-height: 150px;
             align-content: flex-start;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-family: "fontFairunique", Helvetica, Arial, sans-serif;
             background-color: #0f1216;
             color: white;
+            margin: 0 auto;
         }
 
         .fLetter {
-            font-family: cursive;
             padding: 5px;
-            background-color: pink;
-            margin: 0;
-        }
-
-        .canvas__container {
-            height: 100%;
-            position: relative;
-            width: 100%;
-        }
-
-        .canvas__canvas {
-            height: 100%;
-            position: relative;
-            width: 100%;
-            z-index: 1;
-        }
-
-        .canvas__mirror {
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
+            transform: rotate(-90deg);
         }
     </style>
 </head>
 
 <body>
-    <div class="canvas__container">
-        <canvas id="cnvs" class="canvas__canvas">test canvas</canvas>
-    </div>
     <h1>Trafai</h1>
-    <div id="affichage"></div>
-
-    <form action="">
+    <form id="inputfform" action="">
         <input type="text">
-        <button>Envoi</button>
+        <br/>
+        <button>Fairunise</button>
+    </form>
+    <div id="affichage"></div>
+    <form id="genJpg" action="">
+        <button>Save</button>
     </form>
 
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script>
         "use strict"
         //on sélectionne les éléments rentrés dans l'input
-        let inputFForm = document.querySelector('form');
+        let inputFForm = document.getElementById("inputfform");
+        //On écoute les soumissions du bouton de traduction
         inputFForm.addEventListener('submit', function (evt) {
             evt.preventDefault();
             let input = document.querySelector('input').value;
-            //            document.querySelector('input').value = "";
-            //on place chaque lettre dans un tableau
+            //On crée la div conteneur
             let fairu = document.createElement('div');
             fairu.className = "fairu";
-
+            // on place chaque lettre dans une div avec la bonne classe
             for (let letter of input) {
                 let divFairu = document.createElement('div');
                 divFairu.className = "fLetter";
                 divFairu.textContent = letter;
                 fairu.appendChild(divFairu);
             };
+            // on place la div conteneur dans le dom
             affichage.appendChild(fairu);
         });
 
-        html2canvas(document.getElementById('affichage'), {
-            onrendered: function (canvas) {
-                // document.body.appendChild(canvas);
-                window.open(canvas.toDataURL('image/jpeg'));
-            }
+        //on écoute le bouton pour sauver l'image
+        let genJpg = document.getElementById("genJpg");
+        genJpg.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+
+            //on en fait un canvas
+            document.querySelector('input').value = "";
+            html2canvas(document.getElementById('affichage'), {
+
+                onrendered: function (canvas) {
+                    let imgData = canvas.toDataURL("image/jpeg");
+                    //on en fait un pdf
+                    let pdf = new jsPDF();
+                    pdf.addImage(imgData, 'JPEG', 0, 0, -180, -180);
+                    pdf.save("download.pdf");
+                }
+
+            });
+            //on supprimer la div une fois qu'elle est auvegardée
+            let fairu = document.querySelector('.fairu');
+            affichage.removeChild(fairu);
         });
 
-        var c = document.getElementById('the_canvas_element_id');
-        var t = c.getContext('2d');
+
     </script>
 </body>
 

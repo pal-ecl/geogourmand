@@ -1,87 +1,125 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-------------Ajouter des br en js après chaque lettre, et ajouter les lettres dans l'ordre inverse, boucle et manipulation du dom-----
+    transformer le rendu en image ? https://www.npmjs.com/package/html-to-image ------------>
+    <style>
+        @font-face {
+            font-family: "fontFairunique";
+            src: url('fontFairunique.ttf');
+        }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-                #affichage {
-                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-                    background-color: blue;
-                    color: white;
-                    margin: 0 auto;
-                }
-        
-                /* les lettres doivent s'afficher de bas en haut et de gauche à droite. */
-                .fairu {
-                    display: flex;
-                    flex-direction: column-reverse;
-                    flex-wrap: wrap;
-                    height: 150px;
-                    align-content: flex-start;
-                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-                    background-color: #0f1216;
-                    color: white;
-                }
-        
-                .fLetter {
-                    font-family: cursive;
-                    padding: 5px;
-                    background-color: black;
-                    margin: 0;
-                }
-                </style>
+        .container {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            background-color: #032711;
+            color: white;
+            margin: 0 auto;
+        }
+
+        /* les lettres doivent s'afficher de bas en haut et de gauche à droite. */
+        .fairu {
+            display: flex;
+            flex-direction: column-reverse;
+            flex-wrap: wrap;
+            max-height: 150px;
+            align-content: flex-start;
+            font-family: "fontFairunique", Helvetica, Arial, sans-serif;
+            background-color: #0f1216;
+            color: white;
+            margin: 0 auto;
+        }
+
+        .fLetter {
+            font-size: xx-large;
+            padding: 5px;
+            transform: rotate(-90deg);
+        }
+    </style>
 </head>
 
-<body bgcolor="black">
-    <div id="wholebody">
-        <a href="javascript:genScreenshotgraph()"><button style="background:white; cursor:pointer">Save </button> </a>
-            </div>>
-        <div id="affichage"></div>
+<body>
+    <h1>Trafai</h1>
+    <form id="inputfform" action="">
+        <label>Size of the document :<br />
+            Width :
+            <input type="text" id="widthConversion" name="widthConversion">
+            <br />
+            Height :
+            <input type="text" id="heightConversion" name="heightConversion">
+            <br />
+        </label>
+        <label>Text To convert:
+            <input type="text" id="toConvert" name="toConvert">
+        </label>
+        <br />
+        <button>Convert</button>
+    </form>
+    <div id="affichage"></div>
+    <form id="genJpg" action="">
+        <button>Save</button>
+    </form>
 
-        <form action="">
-            <input type="text">
-            <button>Envoi</button>
-        </form>
 
-</body>
 
-<script>
-    let inputFForm = document.querySelector('form');
-    inputFForm.addEventListener('submit', function (evt) {
-        evt.preventDefault();
-        let input = document.querySelector('input').value;
-        //            document.querySelector('input').value = "";
-        //on place chaque lettre dans un tableau
-        let fairu = document.createElement('div');
-        fairu.className = "fairu";
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script>
+        "use strict"
 
-        for (let letter of input) {
-            let divFairu = document.createElement('div');
-            divFairu.className = "fLetter";
-            divFairu.textContent = letter;
-            fairu.appendChild(divFairu);
-        };
-        affichage.appendChild(fairu);
-    });
-
-    function genScreenshotgraph() {
-        document.querySelector('input').value = "";
-        html2canvas(document.getElementById('affichage'), {
-
-            onrendered: function (canvas) {
-
-                var imgData = canvas.toDataURL("image/jpeg");
-                var pdf = new jsPDF();
-                pdf.addImage(imgData, 'JPEG', 0, 0, -180, -180);
-                pdf.save("download.pdf");
-
-            }
+        let widthConversion = document.getElementById("widthConversion");
+        
+        //on sélectionne les éléments rentrés dans l'input
+        let inputFForm = document.getElementById("inputfform");
+        //On écoute les soumissions du bouton de traduction
+        inputFForm.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            let toConvert = document.getElementById("toConvert").value;
+            //On crée la div conteneur
+            let fairu = document.createElement('div');
+            fairu.className = "fairu";
+            // on place chaque lettre dans une div avec la bonne classe
+            for (let letter of toConvert) {
+                let divFairu = document.createElement('div');
+                divFairu.className = "fLetter";
+                divFairu.textContent = letter;
+                fairu.appendChild(divFairu);
+            };
+            // on place la div conteneur dans le dom
+            affichage.appendChild(fairu);
         });
-        let fairu = document.querySelector('.fairu');
-        affichage.removeChild(fairu);
 
-    }
-</script>
+        //on écoute le bouton pour sauver l'image
+        let genJpg = document.getElementById("genJpg");
+        genJpg.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+
+            //on en fait un canvas
+            document.querySelector('input').value = "";
+            html2canvas(document.getElementById('affichage'), {
+
+
+                onrendered: function (canvas) {
+                    let imgData = canvas.toDataURL("image/png");
+                    //on en fait un pdf
+                    let pdf = new jsPDF();
+                    pdf.addImage(imgData, 'JPEG', 0, 0, -180, -180);
+                    pdf.save("download.pdf");
+                    // console.log(imgData);
+                    // document.write('<img src="'+imgData+'"/>');
+                }
+
+            });
+            //on supprimer la div une fois qu'elle est auvegardée
+            let fairu = document.querySelector('.fairu');
+            affichage.removeChild(fairu);
+        });
+
+
+    </script>
+</body>
 
 </html>
