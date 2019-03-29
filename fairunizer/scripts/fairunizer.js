@@ -20,6 +20,15 @@ inputText.addEventListener('submit', function (evt) {
     convertedText.appendChild(convertedLetters);
 });
 
+//clear the conversion zone
+toConvert.addEventListener('focus', function (evt) {
+    evt.preventDefault();
+    let convertedLetters = document.querySelector('.convertedLetters');
+    if (convertedLetters){
+    convertedText.removeChild(convertedLetters);
+    }
+});
+
 
 // size of the converted text zone
 let convertSize = document.getElementById("convertSize");
@@ -27,15 +36,15 @@ let convertSize = document.getElementById("convertSize");
 convertSize.addEventListener('submit', function (evt) {
     evt.preventDefault();
     let convertedLetters = document.getElementsByClassName("convertedLetters")[0];
-    let fWidth = document.getElementById("widthConversion").value + "px";
-    let fHeight = document.getElementById("heightConversion").value + "px";
+    let fWidth = document.getElementById("widthConversion").value;
+    let fHeight = document.getElementById("heightConversion").value;
     if (convertedLetters) {
-        convertedLetters.style.width = fWidth;
-        convertedLetters.style.height = fHeight;
+        convertedLetters.style.width = fWidth + "px";
+        convertedLetters.style.height = fHeight + "px";
     }
 
-    convertedText.style.width = fWidth;
-    convertedText.style.height = fHeight;
+    convertedText.style.width = parseInt(fWidth, 10) + 5 + "px";
+    convertedText.style.height = parseInt(fHeight, 10) + 5 + "px";
 });
 
 
@@ -44,28 +53,19 @@ let genPng = document.getElementById("genPng");
 
 genPng.addEventListener('submit', function (evt) {
     evt.preventDefault();
+    document.querySelector('input').value = "";
 
     //canvas creation
-    document.querySelector('input').value = "";
-    html2canvas(document.getElementById('convertedText'), {
-        onrendered: function (canvas) {
-            let imgData = canvas.toDataURL("image/png");
-            //image creation
-            let fImage = document.createElement('img');
-            fImage.src = imgData;
-            imageZone.appendChild(fImage);
-        }
+    html2canvas(document.getElementById('convertedText')).then(canvas => {
+        imageZone.appendChild(canvas)
     });
-    //once the image is created we delete the conversion
-    let convertedLetters = document.querySelector('.convertedLetters');
-    convertedText.removeChild(convertedLetters);
 });
 
 //deleting of the images
 let deletePng = document.getElementById("deletePng");
 deletePng.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    let toDeleteImgs = document.querySelectorAll('img');
+    let toDeleteImgs = document.querySelectorAll('canvas');
     if (toDeleteImgs) {
         toDeleteImgs.forEach(function (toDeleteImg) {
             imageZone.removeChild(toDeleteImg);
