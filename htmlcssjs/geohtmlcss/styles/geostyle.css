@@ -1,0 +1,97 @@
+@font-face {
+    font-family: "Bitter-Regular";
+    src: url('../fonts/Bitter/Bitter-Regular.ttf');
+}
+
+@font-face {
+    font-family: "TitilliumWeb-Regular";
+    src: url('../fonts/Titillium_Web/TitilliumWeb-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Karla-Regular";
+    src: url('../fonts/Karla/Karla-Regular.ttf');
+}
+
+body {
+    font-family: 'Karla-Regular', sans-serif;
+    font-size: 1.2em;
+}
+
+main {
+    margin: auto;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+    width: 85%;
+    background-color: rgb(213, 207, 196);
+}
+
+ul {
+    list-style-type:none
+}
+
+button {
+    font-family: 'OpenSansCondensed-Bolde', sans-serif;
+    font-size: 0.8em;
+    margin: 3px;
+    width: 95%;
+
+    background-color: rgb(90, 85, 75);
+    border: 0.5px solid black;
+    border-radius: 5px;
+    color: rgba(211, 211, 211, 0.829);
+
+}
+
+button:hover {
+    background-color: rgba(64, 61, 54);
+}
+
+.articles {
+    top: 80px;
+    right: 10px;
+    z-index:1;
+    position: absolute;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgb(90, 85, 75);
+    width: 85%;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#myMap {
+    top: 10px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 85%;
+    height: 85vh;
+    border: 1px solid black;
+}
+
+#geogourmand {
+    top: 10px;
+    margin: auto;
+    padding: 10px;
+    width: 60%;
+    border: 1px solid black;
+}
+
+header {
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 85%;
+    
+}
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    align-items: stretch;
+}
+
+
