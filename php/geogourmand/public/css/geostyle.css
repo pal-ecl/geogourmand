@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "Bitter-Regular";
+    src: url('../fonts/Bitter/Bitter-Regular.ttf');
+}
+
+@font-face {
+    font-family: "TitilliumWeb-Regular";
+    src: url('../fonts/Titillium_Web/TitilliumWeb-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Karla-Regular";
+    src: url('../fonts/Karla/Karla-Regular.ttf');
+}
+
+body {
+    font-family: 'Karla-Regular', sans-serif;
+    font-size: 1.2em;
+}
+
+main {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+    width: 85%;
+    background-color: rgb(213, 207, 196);
+}
+
+ul {
+    list-style-type:none
+}
+
+#logoButton{
+    font-family: 'TitilliumWeb-Regular', sans-serif;
+    font-size: 0.9em;
+    margin: 8px;
+    width: 80%;
+    background-color: rgb(90, 85, 75);
+    border: 0.5px solid black;
+    border-radius: 5px;
+    color: rgb(211, 211, 211);
+    text-align: center;
+
+}
+button {
+    font-family: 'OpenSansCondensed-Bolde', sans-serif;
+    font-size: 0.8em;
+    margin: 8px;
+    width: 80%;
+    background-color: rgb(90, 85, 75);
+    border: 0.5px solid black;
+    border-radius: 5px;
+    color: rgb(211, 211, 211);
+
+}
+
+button:hover {
+    background-color: rgb(64, 61, 54);
+}
+
+.articles {
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgb(90, 85, 75);
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+a{
+    text-decoration: none;
+    color: rgb(211, 211, 211);
+}

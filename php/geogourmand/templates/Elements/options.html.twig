@@ -1,0 +1,16 @@
+{% extends "base_app.html.twig" %}
+
+{% block content %}
+    <div class="articles">
+        <article class="article">
+            <h2>Options</h2>
+            {{ form_start(form, {attr: {"novalidate": "novalidate"}}) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </article>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}

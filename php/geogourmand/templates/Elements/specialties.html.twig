@@ -1,0 +1,18 @@
+{% extends "base_app.html.twig" %}
+
+{% block content %}
+        <div class="articles">
+                <article class="article">
+                        {% for specialty in specialties %}
+                                <div class="specialty" id="{{ specialty.title }}">
+                                <h2>{{ specialty.title }}</h2>
+                                <p>{{ specialty.description }}</p>
+                                </div>
+                        {% endfor %}
+                </article>
+        </div>
+{% endblock %}
+
+{% block js %}
+        {{ parent() }}
+{% endblock %}

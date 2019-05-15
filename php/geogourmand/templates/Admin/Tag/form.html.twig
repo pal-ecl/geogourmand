@@ -1,0 +1,11 @@
+{%  extends "base_app.html.twig" %}
+{%  form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    <h2>Tags</h2>
+
+    {{ form_start(form, {attr: {"novalidate": "novalidate"}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

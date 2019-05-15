@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block css %}
+        <link href="{{ asset("css/geostyle.css") }}" rel="stylesheet">
+    {% endblock %}
+    <title>Geogourmand</title>
+</head>
+
+<body>
+<header>
+    <div id="logo">
+        <button id="logoButton">
+        <a href="{{ path("homepage") }}">
+        <h1>Géogourmand</h1>
+        <p>Identifiez les spécialités qui vous entourent !</p>
+        </a>
+        </button>
+    </div>
+    <nav>
+        <ul>
+            <li><button><a href="{{ path("options") }}">Options</a></button></li>
+            <li><button>Mon compte</button></li>
+            <li><button> <a href="{{ path("specialties") }}">Afficher la carte</a></button></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    {% block content %}
+
+    {% endblock %}
+    <div id="myMap"></div>
+</main>
+<footer>
+    <div id="legalNotice"></div>
+</footer>
+<script src="scripts/script.js"></script>
+</body>
+
+</html>

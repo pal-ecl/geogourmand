@@ -1,0 +1,29 @@
+{% extends "base_app.html.twig" %}
+
+{% block content %}
+    <h2>Tags <small><a href="{{ path("admin.tags.form") }}" class="btn btn-small btn-info">+</a></small></h2>
+    <table class="table table_striped">
+        <thead>
+        </thead>
+        <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ tag.label }}</td>
+                <td class="text-right">
+                    <div class="btn-group" role="group">
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path("admin.tags.form", {id: tag.id}) }}">Edit</a>
+                                <a class="dropdown-item" href="{{ path("admin.tags.delete", {id: tag.id}) }}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
