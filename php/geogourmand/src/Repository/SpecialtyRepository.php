@@ -48,4 +48,14 @@ class SpecialtyRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findSpecialtiesToDisplay()
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        return $qb
+            ->select('s')
+            ->getQuery()
+            ->getResult();
+    }
 }

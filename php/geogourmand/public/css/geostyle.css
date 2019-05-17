@@ -20,6 +20,7 @@ body {
 
 main {
     margin: auto;
+    position: relative;
     padding: 10px;
     text-align: center;
     border: 1px solid black;
@@ -31,43 +32,66 @@ ul {
     list-style-type:none
 }
 
-#logoButton{
-    font-family: 'TitilliumWeb-Regular', sans-serif;
-    font-size: 0.9em;
-    margin: 8px;
-    width: 80%;
-    background-color: rgb(90, 85, 75);
-    border: 0.5px solid black;
-    border-radius: 5px;
-    color: rgb(211, 211, 211);
-    text-align: center;
-
-}
 button {
     font-family: 'OpenSansCondensed-Bolde', sans-serif;
     font-size: 0.8em;
-    margin: 8px;
-    width: 80%;
+    margin: 3px;
+    width: 95%;
+
     background-color: rgb(90, 85, 75);
     border: 0.5px solid black;
     border-radius: 5px;
-    color: rgb(211, 211, 211);
+    color: rgba(211, 211, 211, 0.829);
 
 }
 
 button:hover {
-    background-color: rgb(64, 61, 54);
+    background-color: rgba(64, 61, 54);
 }
 
 .articles {
+    top: 80px;
+    right: 10px;
+    z-index:1;
+    position: absolute;
     margin: auto;
     padding: 10px;
     border: 1px solid rgb(90, 85, 75);
-    width: 90%;
-    background-color: rgba(255, 255, 255, 0.5);
+    width: 85%;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-a{
-    text-decoration: none;
-    color: rgb(211, 211, 211);
+#myMap {
+    top: 10px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 85%;
+    height: 85vh;
+    border: 1px solid black;
 }
+
+#geogourmand {
+    top: 10px;
+    margin: auto;
+    padding: 10px;
+    width: 60%;
+    border: 1px solid black;
+}
+
+header {
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 85%;
+    
+}
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    align-items: stretch;
+}
+
+

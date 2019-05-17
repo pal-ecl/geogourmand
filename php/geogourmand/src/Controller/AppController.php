@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Specialty;
 use App\Form\OptionsType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 Class AppController extends AbstractController{
 
@@ -15,9 +16,15 @@ Class AppController extends AbstractController{
      */
     public function home()
     {
+        $specialtiesToDisplay = json_encode($this
+            ->getDoctrine()
+            ->getRepository(Specialty::class)
+            ->findSpecialtiesToDisplay());
+
         return $this->render("App/home.html.twig",
             [
-                "pageTitle"=>"Géogourmand"
+                "pageTitle"=>"Géogourmand",
+                "specialtiesToDisplay"=>$specialtiesToDisplay,
             ]
         );
     }

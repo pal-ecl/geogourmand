@@ -14,32 +14,36 @@
 
 <body>
 <header>
-    <div id="logo">
-        <button id="logoButton">
-        <a href="{{ path("homepage") }}">
+    <div id="geogourmand">
         <h1>Géogourmand</h1>
         <p>Identifiez les spécialités qui vous entourent !</p>
-        </a>
-        </button>
     </div>
     <nav>
-        <ul>
-            <li><button><a href="{{ path("options") }}">Options</a></button></li>
-            <li><button>Mon compte</button></li>
-            <li><button> <a href="{{ path("specialties") }}">Afficher la carte</a></button></li>
-        </ul>
+        <button>Options</button>
+        <button>Mon compte</button>
+        <button>Afficher la carte</button>
     </nav>
 </header>
-<main>
+
+<p>{{ dump(specialtiesToDisplay) }}</p>
+
+
+<main data-specialties="{{ specialtiesToDisplay }}">
     {% block content %}
 
     {% endblock %}
-    <div id="myMap"></div>
+    <div id="myMap">
+    </div>
 </main>
 <footer>
     <div id="legalNotice"></div>
 </footer>
-<script src="scripts/script.js"></script>
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnam1p2tgjseVn16mmQuh6c4gDJWuT0Tc"></script>
+    <script src="{{ asset("scripts/scripts.js") }}"></script>
+{% endblock %}
+
+
 </body>
 
 </html>
