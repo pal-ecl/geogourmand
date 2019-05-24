@@ -42,7 +42,7 @@ let publics = 'vendor/nuke.json';
                     lat: specialty.position['lat'],
                     lng: specialty.position['long']
                 },
-                icon: 'vendor/mou.png',
+                icon: 'vendor/specialty.png',
                 map: privates.map
             })
         }
